@@ -11,34 +11,22 @@ for(let i = 2; i < lines.length; i++) {
     requests.push(lines[i].trim().split(' ').map((elem) => +elem));
 }
 
-// console.log(requests);
+let result = [];
+for(let i = 0; i < m; i++){
+    let l = requests[i][0];
+    let r = requests[i][1];
+    let section = array.slice(l, r + 1);
 
-// function notMin(n, m, array, requests) {
-    let result = [];
-    for(let i = 0; i < m; i++){
-        let l = requests[i][0];
-        let r = requests[i][1];
-        let section = array.slice(l, r + 1);
- 
-        let sum = section.reduce((sum, el) => sum + el, 0);
-        let flag;
-        let min = Math.min(...section);
-        // console.log(min);
+    let sum = section.reduce((sum, el) => sum + el, 0);
+    let flag;
 
-        (sum / section.length === section[0]) ? flag = true : flag = false;
-        
-        if (flag) {
-            result.push('NOT FOUND');
-        } else {
-            result.push(Math.max(...section));
-        }
+    (sum / section.length === section[0]) ? flag = true : flag = false;
+    
+    if (flag) {
+        result.push('NOT FOUND');
+    } else {
+        result.push(Math.max(...section));
     }
-    // console.log(result.join('\n'));
-    // return result;
-// }
-
-// let result = notMin(n, m, array, requests);
-// console.log(result.join('\n'));
-
+}
 
 fs.writeFileSync("A-output.txt", result.join('\n'));
